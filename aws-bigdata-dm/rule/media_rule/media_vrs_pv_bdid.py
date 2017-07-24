@@ -1,0 +1,34 @@
+# encoding: utf-8
+# @Author: gibbs
+# @Date:   2016-05-17T18:46:24+08:00
+# @Last modified by:   gibbs
+# @Last modified time: 2016-05-17T19:29:22+08:00
+
+from rule.rule import rule
+from data_class.media_vrs_bdid_map import media_vrs_bdid_map_client
+# from data_class.mglive_id_auid import mglive_id_auid_client
+
+
+class MediaVRSPvBDid(rule):
+    """
+    :换算规则
+    """
+
+    def __init__(self):
+        super(MediaVRSPvBDid, self).__init__()
+
+    def convert(self, field):
+        """
+        :param field:  input field data(bd_id)
+        :return: bd_id
+        """
+        # pt=4 pv 表示个人点播类型
+        if len(field) == 2 and str(field[1]) == "4":
+            # bd_id = field[0]
+            # if bd_id == "-" or bd_id == "" or str(bd_id) == "0":
+            #     return [0, '-1']
+            # return mglive_id_auid_client.get_id_by_auid([bd_id])
+            return [0, '-1']
+        else:
+            return media_vrs_bdid_map_client.check_bd_id([field[0]])
+
